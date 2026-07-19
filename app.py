@@ -25,6 +25,7 @@ from routes.profile import profile_bp
 from routes.achievements import achievements_bp
 from routes.backup import backup_bp
 from routes.search import search_bp
+from openai import OpenAI
 load_dotenv()
 
 client = OpenAI(
@@ -239,42 +240,28 @@ def login():
 
         username = request.form.get("username")
         password = request.form.get("password")
-        print("---------- LOGIN DEBUG ----------")
-        print("Entered username:", username)
-        print("Entered password:", password)
-        print("Users loaded:", users)
-        print("--------------------------------")
-
-        print("ENTERED USERNAME:", username)
-        print("ENTERED PASSWORD:", password)
 
         users = read_json("students.json")
 
-        print("USERS FROM FILE:", users)
+        print("Users loaded:", users)
+        print("Username:", username)
+        print("Password:", password)
 
         for user in users:
-
-            print("CHECKING USER:", user)
 
             if (
                 user.get("username") == username
                 and user.get("password") == password
             ):
 
-                print("LOGIN SUCCESS")
-
                 session["username"] = username
                 session["name"] = user.get("name")
 
                 return redirect(url_for("dashboard"))
 
-
-        print("LOGIN FAILED")
         flash("Invalid username or password")
 
-
-    return str(users)
-# --------------------------------
+    return render_template("login.html")
 # Dashboard
 # --------------------------------
 @app.route("/dashboard")
