@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from datetime import datetime
+from openai import OpenAI
+from dotenv import load_dotenv
+import os
 
 from utils.auth import check_login
 from utils.json_manager import read_json
@@ -13,6 +16,7 @@ from routes.planner import planner_bp
 from routes.notes import notes_bp
 from routes.goals import goals_bp
 from routes.attendance import attendance_bp
+from flask import session, redirect, url_for
 from routes.timetable import timetable_bp
 from routes.analytics import analytics_bp
 from routes.settings import settings_bp
@@ -21,10 +25,16 @@ from routes.profile import profile_bp
 from routes.achievements import achievements_bp
 from routes.backup import backup_bp
 from routes.search import search_bp
+load_dotenv()
+
+client = OpenAI(
+    api_key=os.getenv("OPENAI_API_KEY")
+)
 app = Flask(__name__)
 
 # Secret key
-app.secret_key = "student_planner_secret_key"
+app.secret_key = os.environ.get("SECRET_KEY", "studentplanner123")
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
 # Register Blueprints
 app.register_blueprint(search_bp)
@@ -41,6 +51,124 @@ app.register_blueprint(goals_bp)
 app.register_blueprint(attendance_bp)
 app.register_blueprint(timetable_bp)
 app.register_blueprint(analytics_bp)
+@app.route("/dark-theme")
+def dark_theme():
+
+    session["theme"] = "dark"
+
+    return redirect(request.referrer or url_for("dashboard"))
+
+
+@app.route("/light-theme")
+def light_theme():
+
+    session["theme"] = "light"
+
+    return redirect(request.referrer or url_for("dashboard"))
+@app.route("/ai-quiz", methods=["GET", "POST"])
+def ai_quiz():
+
+    quiz = ""
+
+    if request.method == "POST":
+
+        topic = request.form["topic"]
+
+        prompt = f"""
+        Generate 10 multiple-choice questions for the topic: {topic}.
+
+        For each question provide:
+        - Question
+        - 4 options (A, B, C, D)
+        - Correct answer
+        - Short explanation
+        """
+
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are an expert exam question setter."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ]
+        )
+
+        quiz = response.choices[0].message.content
+
+    return render_template(
+        "ai_quiz.html",
+        quiz=quiz
+    )
+@app.route("/ai-summarizer", methods=["GET", "POST"])
+def ai_summarizer():
+
+    summary = ""
+
+    if request.method == "POST":
+
+        notes = request.form["notes"]
+
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "Summarize notes into short exam-ready bullet points."
+                },
+                {
+                    "role": "user",
+                    "content": notes
+                }
+            ]
+        )
+
+        summary = response.choices[0].message.content
+
+    return render_template(
+        "ai_summarizer.html",
+        summary=summary
+    )
+@app.route("/ai-study-plan", methods=["GET", "POST"])
+def ai_study_plan():
+
+    plan = ""
+
+    if request.method == "POST":
+
+        subjects = request.form["subjects"]
+        exam_date = request.form["exam_date"]
+        study_hours = request.form["study_hours"]
+
+        prompt = f"""
+        Create a detailed study plan for a Class 11/12 student.
+
+        Subjects: {subjects}
+        Exam Date: {exam_date}
+        Daily Study Hours: {study_hours}
+
+        Make a day-wise timetable with revision and mock tests.
+        Keep it practical and motivating.
+        """
+
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": "You are an expert academic planner."},
+                {"role": "user", "content": prompt}
+            ]
+        )
+
+        plan = response.choices[0].message.content
+
+    return render_template(
+        "ai_study_plan.html",
+        plan=plan
+    )
 @app.route("/register", methods=["GET", "POST"])
 def register():
 
@@ -105,41 +233,47 @@ def register():
 # --------------------------------
 @app.route("/", methods=["GET", "POST"])
 @app.route("/login", methods=["GET", "POST"])
-@app.route("/login", methods=["GET", "POST"])
 def login():
 
     if request.method == "POST":
 
-        username = request.form["username"]
-        password = request.form["password"]
+        username = request.form.get("username")
+        password = request.form.get("password")
+        print("---------- LOGIN DEBUG ----------")
+        print("Entered username:", username)
+        print("Entered password:", password)
+        print("Users loaded:", users)
+        print("--------------------------------")
+
+        print("ENTERED USERNAME:", username)
+        print("ENTERED PASSWORD:", password)
 
         users = read_json("students.json")
 
-        
-        print("USERS FROM JSON:", users)
-
+        print("USERS FROM FILE:", users)
 
         for user in users:
+
+            print("CHECKING USER:", user)
 
             if (
                 user.get("username") == username
                 and user.get("password") == password
             ):
 
+                print("LOGIN SUCCESS")
+
                 session["username"] = username
                 session["name"] = user.get("name")
 
-                return redirect(
-                    url_for("dashboard")
-                )
+                return redirect(url_for("dashboard"))
 
 
+        print("LOGIN FAILED")
         flash("Invalid username or password")
 
 
-    return render_template("login.html")
-
-
+    return str(users)
 # --------------------------------
 # Dashboard
 # --------------------------------
@@ -307,8 +441,7 @@ def internal_error(error):
 # Run Application
 # --------------------------------
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
-# ===============================
+    app.run(host="0.0.0.0", port=5000, debug=True)
 # Error Pages
 # ===============================
 

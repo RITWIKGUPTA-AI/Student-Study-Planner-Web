@@ -9,132 +9,113 @@ Login
 
 <div class="container">
 
-<div class="row justify-content-center align-items-center vh-100">
+    <div class="row justify-content-center align-items-center vh-100">
 
-<div class="col-md-5">
+        <div class="col-md-5">
 
+            <div class="card shadow-lg p-4 rounded-4">
 
-<div class="card shadow-lg p-4 rounded-4">
+                <h2 class="text-center mb-4">
+                    Student Study Planner
+                </h2>
 
 
-<h2 class="text-center mb-4">
+                <form method="POST" action="{{ url_for('login') }}">
 
-Student Study Planner
 
-</h2>
+                    <div class="mb-3">
 
+                        <label class="form-label">
+                            Username
+                        </label>
 
+                        <input
+                        type="text"
+                        class="form-control"
+                        name="username"
+                        placeholder="Enter username"
+                        autocomplete="username"
+                        required>
 
-<form method="POST">
+                    </div>
 
 
-<div class="mb-3">
 
-<label class="form-label">
+                    <div class="mb-3">
 
-Username
+                        <label class="form-label">
+                            Password
+                        </label>
 
-</label>
+                        <input
+                        type="password"
+                        class="form-control"
+                        name="password"
+                        placeholder="Enter password"
+                        autocomplete="current-password"
+                        required>
 
+                    </div>
 
-<input
-type="text"
-class="form-control"
-name="username"
-placeholder="Enter username"
-required>
 
-</div>
 
+                    <button
+                    type="submit"
+                    class="btn btn-primary w-100">
 
+                        Login
 
-<div class="mb-3">
+                    </button>
 
-<label class="form-label">
 
-Password
+                </form>
 
-</label>
 
 
-<input
-type="password"
-class="form-control"
-name="password"
-placeholder="Enter password"
-required>
+                <div class="text-center mt-3">
 
-</div>
+                    <p class="mb-2">
+                        Don't have an account?
+                    </p>
 
 
+                    {% if register_available %}
 
+                    <a href="{{ url_for('register') }}"
+                    class="btn btn-success w-100">
 
-<button
-class="btn btn-primary w-100">
+                        Create New Account
 
-Login
+                    </a>
 
-</button>
+                    {% endif %}
 
 
+                </div>
 
-</form>
 
 
+                {% with messages = get_flashed_messages() %}
 
-<!-- Register Button -->
+                    {% if messages %}
 
-<div class="text-center mt-3">
+                    <div class="alert alert-danger mt-3">
 
-<p class="mb-2">
+                        {{ messages[0] }}
 
-Don't have an account?
+                    </div>
 
-</p>
+                    {% endif %}
 
+                {% endwith %}
 
-<a href="{{ url_for('register') }}"
-class="btn btn-success w-100">
 
-Create New Account
 
-</a>
+            </div>
 
+        </div>
 
-</div>
-
-
-
-
-
-{% with messages = get_flashed_messages() %}
-
-{% if messages %}
-
-
-<div class="alert alert-danger mt-3">
-
-{{ messages[0] }}
-
-</div>
-
-
-{% endif %}
-
-{% endwith %}
-
-
-
-
-
-</div>
-
-
-</div>
-
-
-</div>
-
+    </div>
 
 </div>
 
