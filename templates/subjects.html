@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% block title %}
+Subjects
+{% endblock %}
+
+{% block content %}
+
+<div class="wrapper">
+
+<div class="sidebar">
+
+<h3>Study Planner</h3>
+
+<hr>
+
+<a href="/dashboard">Dashboard</a>
+
+<a href="/subjects">Subjects</a>
+
+<a href="/tasks">Tasks</a>
+
+<a href="/logout">Logout</a>
+
+</div>
+
+<div class="content">
+
+<div class="topbar">
+
+<h2>Subjects</h2>
+
+</div>
+
+<div class="container mt-4">
+
+<div class="card shadow p-4">
+
+<form method="POST">
+
+<div class="row">
+
+<div class="col-md-8">
+
+<input
+
+type="text"
+
+class="form-control"
+
+name="subject"
+
+placeholder="Enter Subject"
+
+required>
+
+</div>
+
+<div class="col-md-4">
+
+<button
+
+class="btn btn-success w-100">
+
+Add Subject
+
+</button>
+
+</div>
+
+</div>
+
+</form>
+
+<hr>
+
+<form method="GET">
+
+<input
+
+type="text"
+
+class="form-control"
+
+name="search"
+
+placeholder="Search Subject">
+
+</form>
+
+<br>
+
+<h5>
+
+Total Subjects :
+
+{{ total }}
+
+</h5>
+
+<table class="table table-hover">
+
+<thead>
+
+<tr>
+
+<th>Subject</th>
+
+<th width="120">
+
+Action
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for subject in subjects %}
+
+<tr>
+
+<td>
+
+{{ subject }}
+
+</td>
+
+<td>
+
+<a
+
+class="btn btn-danger btn-sm"
+
+href="/delete_subject/{{ subject }}">
+
+Delete
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

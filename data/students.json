@@ -1,0 +1,47 @@
+[
+    {
+        "name": "ritwik",
+        "class": "11",
+        "subject": "maths"
+    },
+    {
+        "name": "RITWIK GUPTA ",
+        "username": "ritwik gupta",
+        "password": "Sanyam@3007",
+        "tasks": [],
+        "notes": [],
+        "goals": []
+    },
+    {
+        "name": "RITWIK GUPTA ",
+        "username": "RITWIK GUPTA",
+        "password": "Sanyam@3007",
+        "tasks": [],
+        "notes": [],
+        "goals": []
+    },
+    {
+        "name": "ANISHA GUPTA",
+        "username": "ANISHA GUPTA",
+        "password": "Anisha@123",
+        "tasks": [],
+        "notes": [],
+        "goals": []
+    },
+    {
+        "name": "RITWIK GUPTA ",
+        "username": "TEST",
+        "password": "Ritwik@123",
+        "tasks": [],
+        "notes": [],
+        "goals": []
+    },
+    {
+        "name": "REENA GUPTA",
+        "username": "REENA GUPTA",
+        "password": "12345",
+        "tasks": [],
+        "notes": [],
+        "goals": []
+    }
+]

@@ -1,0 +1,800 @@
+/* ==========================================
+   Student Study Planner
+   Professional Style Sheet
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#eef5ff;
+    color:#333;
+}
+
+/* ==========================================
+   Layout
+========================================== */
+
+.wrapper{
+    display:flex;
+    min-height:100vh;
+}
+
+/* ==========================================
+   Sidebar
+========================================== */
+
+.sidebar{
+    width:250px;
+    min-height:100vh;
+    background:#0d6efd;
+    position:fixed;
+    left:0;
+    top:0;
+    padding:20px;
+    overflow-y:auto;
+}
+
+.sidebar h3{
+    color:white;
+    margin-bottom:20px;
+}
+
+.sidebar hr{
+    border-color:rgba(255,255,255,.25);
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:12px 15px;
+    margin-bottom:8px;
+    border-radius:10px;
+    transition:.3s;
+}
+
+.sidebar a i{
+    margin-right:10px;
+}
+
+.sidebar a:hover{
+    background:white;
+    color:#0d6efd;
+    padding-left:20px;
+}
+
+/* ==========================================
+   Content
+========================================== */
+
+.content{
+    margin-left:250px;
+    width:100%;
+    padding:25px;
+}
+
+/* ==========================================
+   Topbar
+========================================== */
+
+.topbar{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 5px 18px rgba(0,0,0,.08);
+    margin-bottom:20px;
+}
+
+/* ==========================================
+   Dashboard Cards
+========================================== */
+
+.dashboard-card{
+    border:none;
+    border-radius:18px;
+    padding:25px;
+    background:white;
+    transition:.3s;
+    cursor:pointer;
+    box-shadow:0 6px 18px rgba(0,0,0,.08);
+}
+
+.dashboard-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 15px 30px rgba(0,0,0,.18);
+}
+
+.dashboard-card h2{
+    font-size:34px;
+    font-weight:bold;
+}
+
+.dashboard-card h5{
+    margin-bottom:10px;
+}
+
+.dashboard-card i{
+    font-size:40px;
+    opacity:.8;
+}
+
+/* ==========================================
+   Cards
+========================================== */
+
+.card{
+    border:none;
+    border-radius:18px;
+    box-shadow:0 6px 18px rgba(0,0,0,.08);
+}
+
+/* ==========================================
+   Buttons
+========================================== */
+
+.btn{
+    border-radius:10px;
+}
+
+/* ==========================================
+   Progress Bars
+========================================== */
+
+.progress{
+    height:22px;
+    border-radius:20px;
+}
+
+/* ==========================================
+   Tables
+========================================== */
+
+.table{
+    background:white;
+}
+
+.table th{
+    background:#0d6efd;
+    color:white;
+}
+
+/* ==========================================
+   Forms
+========================================== */
+
+.form-control{
+    border-radius:10px;
+}
+
+textarea{
+    resize:none;
+}
+
+/* ==========================================
+   Dark Theme
+========================================== */
+
+.dark{
+    background:#121212 !important;
+    color:white !important;
+}
+
+.dark body{
+    background:#121212 !important;
+}
+
+.dark .content{
+    background:#121212 !important;
+}
+
+.dark .sidebar{
+    background:#1b1b1b !important;
+}
+
+.dark .topbar{
+    background:#222 !important;
+    color:white !important;
+}
+
+.dark .dashboard-card{
+    background:#2b2b2b !important;
+    color:white !important;
+}
+
+.dark .card{
+    background:#2b2b2b !important;
+    color:white !important;
+}
+
+.dark .table{
+    color:white;
+}
+
+.dark .table th{
+    background:#444;
+}
+
+.dark input,
+.dark textarea,
+.dark select{
+    background:#333 !important;
+    color:white !important;
+    border:1px solid #555;
+}
+
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6,
+.dark p,
+.dark label,
+.dark td,
+.dark th{
+    color:white !important;
+}
+
+/* ==========================================
+   Animations
+========================================== */
+
+.dashboard-card{
+    animation:fadeIn .6s ease;
+}
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media(max-width:992px){
+
+    .sidebar{
+        width:220px;
+    }
+
+    .content{
+        margin-left:220px;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .wrapper{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        position:relative;
+        width:100%;
+        min-height:auto;
+    }
+
+    .content{
+        margin-left:0;
+        width:100%;
+        padding:15px;
+    }
+
+    .dashboard-card{
+        margin-bottom:15px;
+    }
+
+    .topbar{
+        flex-direction:column;
+        gap:15px;
+    }
+
+}
+
+@media(max-width:576px){
+
+    .dashboard-card h2{
+        font-size:28px;
+    }
+
+    .sidebar h3{
+        font-size:24px;
+    }
+
+}
+@media (max-width:768px){
+
+    .sidebar{
+
+    position:relative;
+
+    width:100%;
+
+    height:auto;
+
+    }
+
+    .content{
+
+    margin-left:0;
+
+    }
+
+    .topbar{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    }
+
+}
+/* ==========================================
+   Mobile Responsive
+========================================== */
+
+@media screen and (max-width: 992px){
+
+    .wrapper{
+
+        flex-direction:column;
+
+    }
+
+    .sidebar{
+
+        position:relative;
+
+        width:100%;
+
+        height:auto;
+
+        padding:15px;
+
+    }
+
+    .content{
+
+        margin-left:0;
+
+        width:100%;
+
+        padding:15px;
+
+    }
+
+    .topbar{
+
+        flex-direction:column;
+
+        align-items:flex-start !important;
+
+        gap:10px;
+
+    }
+
+}
+
+@media screen and (max-width:768px){
+
+    .dashboard-card{
+
+        margin-bottom:20px;
+
+    }
+
+    .table-responsive{
+
+        overflow-x:auto;
+
+    }
+
+    table{
+
+        min-width:700px;
+
+    }
+
+    .btn{
+
+        width:100%;
+
+        margin-top:5px;
+
+    }
+
+    .row>[class*="col-"]{
+
+        margin-bottom:15px;
+
+    }
+
+}
+
+@media screen and (max-width:576px){
+
+    h1,h2,h3{
+
+        font-size:1.4rem;
+
+    }
+
+    .card{
+
+        margin-bottom:20px;
+
+    }
+
+    .topbar{
+
+        padding:15px;
+
+    }
+
+    .content{
+
+        padding:10px;
+
+    }
+
+}
+/* ==========================================
+   RESPONSIVE DESIGN
+========================================== */
+
+*{
+    box-sizing:border-box;
+}
+
+img{
+    max-width:100%;
+    height:auto;
+}
+
+.container,
+.container-fluid{
+    width:100%;
+}
+
+table{
+    width:100%;
+}
+
+.table-responsive{
+    overflow-x:auto;
+}
+
+.card{
+    margin-bottom:20px;
+}
+
+.form-control,
+.form-select,
+.btn{
+    width:100%;
+}
+
+.row{
+    margin-left:0;
+    margin-right:0;
+}
+
+/* ==============================
+   Tablet
+============================== */
+
+@media (max-width:992px){
+
+.sidebar{
+
+    width:220px;
+
+}
+
+.content{
+
+    margin-left:220px;
+
+}
+
+.dashboard-card{
+
+    margin-bottom:20px;
+
+}
+
+}
+
+/* ==============================
+   Mobile
+============================== */
+
+@media (max-width:768px){
+
+.sidebar{
+
+    position:relative;
+
+    width:100%;
+
+    height:auto;
+
+}
+
+.content{
+
+    margin-left:0;
+
+    padding:15px;
+
+}
+
+.row>[class*="col-"]{
+
+    margin-bottom:15px;
+
+}
+
+.btn{
+
+    margin-bottom:10px;
+
+}
+
+table{
+
+    display:block;
+
+    overflow-x:auto;
+
+    white-space:nowrap;
+
+}
+
+.card{
+
+    margin-bottom:20px;
+
+}
+
+.topbar{
+
+    flex-direction:column;
+
+    gap:15px;
+
+    text-align:center;
+
+}
+
+}
+
+/* ==============================
+   Small Phones
+============================== */
+
+@media (max-width:576px){
+
+h1{
+
+    font-size:28px;
+
+}
+
+h2{
+
+    font-size:24px;
+
+}
+
+h3{
+
+    font-size:20px;
+
+}
+
+.sidebar a{
+
+    font-size:15px;
+
+    padding:10px;
+
+}
+
+.card-body{
+
+    padding:15px;
+
+}
+
+}
+/* ==========================================
+   HAMBURGER MENU
+========================================== */
+
+.menu-btn{
+
+    display:none;
+
+    position:fixed;
+
+    top:15px;
+
+    left:15px;
+
+    z-index:2000;
+
+    background:#0d6efd;
+
+    color:white;
+
+    border:none;
+
+    padding:10px 14px;
+
+    font-size:24px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+}
+
+/* Mobile */
+
+@media (max-width:768px){
+
+.menu-btn{
+
+    display:block;
+
+}
+
+.sidebar{
+
+    position:fixed;
+
+    left:-260px;
+
+    top:0;
+
+    width:250px;
+
+    height:100vh;
+
+    transition:0.3s;
+
+    z-index:1500;
+
+    overflow-y:auto;
+
+}
+
+.sidebar.active{
+
+    left:0;
+
+}
+
+.content{
+
+    margin-left:0;
+
+    padding-top:70px;
+
+}
+
+}
+/* ===========================
+Loader
+=========================== */
+
+#loader{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+background:white;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+z-index:99999;
+
+}
+
+/* ===========================
+Scroll Button
+=========================== */
+
+#topBtn{
+
+position:fixed;
+
+bottom:20px;
+
+right:20px;
+
+display:none;
+
+z-index:999;
+
+width:50px;
+
+height:50px;
+
+font-size:22px;
+
+}
+
+/* ===========================
+Sidebar Animation
+=========================== */
+
+.sidebar{
+
+transition:.3s;
+
+}
+
+@media(max-width:768px){
+
+.sidebar{
+
+position:fixed;
+
+left:-260px;
+
+top:0;
+
+height:100vh;
+
+width:250px;
+
+z-index:1500;
+
+overflow-y:auto;
+
+}
+
+.sidebar.active{
+
+left:0;
+
+}
+
+.content{
+
+margin-left:0;
+
+padding-top:70px;
+
+}
+
+}

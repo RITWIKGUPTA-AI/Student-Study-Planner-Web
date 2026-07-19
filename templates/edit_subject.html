@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit Subject
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="card shadow p-4">
+
+        <h3>Edit Subject</h3>
+
+        <form method="POST">
+
+            <input
+                type="text"
+                class="form-control mb-3"
+                name="subject"
+                value="{{ old_name }}"
+                required>
+
+            <button class="btn btn-primary">
+                Update Subject
+            </button>
+
+            <a href="/subjects" class="btn btn-secondary">
+                Cancel
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
